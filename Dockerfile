@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     cpio \
     sudo \
+    apt-utils \
     lsb-release && \
     rm -rf /var/lib/apt/lists/*
 RUN mkdir -p $TEMP_DIR && cd $TEMP_DIR && \
@@ -30,7 +31,7 @@ RUN mkdir $INSTALL_DIR/deployment_tools/inference_engine/samples/build
 RUN cd $INSTALL_DIR/deployment_tools/inference_engine/samples/build 
 RUN /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh && cmake .. && make -j1"
 
-CMD ["source", "/opt/intel/openvino/bin/setupvars.sh"]
+# CMD ["source", "/opt/intel/openvino/bin/setupvars.sh"]
 
 
 # Configure the Model Optimizer
