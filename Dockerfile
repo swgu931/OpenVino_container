@@ -25,5 +25,12 @@ RUN $INSTALL_DIR/install_dependencies/install_cv_sdk_dependencies.sh
 # build Inference Engine samples
 RUN mkdir $INSTALL_DIR/deployment_tools/inference_engine/samples/build && cd $INSTALL_DIR/deployment_tools/inference_engine/samples/build && \
     /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh && cmake .. && make -j1"
-    
-    
+
+# 1. Build a Docker* image with the following command
+# docker build . -t <image_name> \
+# --build-arg HTTP_PROXY=<http://your_proxy_server.com:port> \
+# --build-arg HTTPS_PROXY=<https://your_proxy_server.com:port>    
+
+
+# 2. Run a Docker* container with the following command
+# docker run -it <image_name>
