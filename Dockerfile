@@ -1,7 +1,7 @@
 # refered from https://docs.openvinotoolkit.org/2018_R5/_docs_install_guides_installing_openvino_docker.html
 # refered from https://docs.openvinotoolkit.org/latest/_docs_install_guides_installing_openvino_linux.html
 
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 ENV http_proxy $HTTP_PROXY
 ENV https_proxy $HTTP_PROXY
