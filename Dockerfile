@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y -q --no-install-recommends \
     apt-utils \
     lsb-release && \
     rm -rf /var/lib/apt/lists/*
+    
 RUN mkdir -p $TEMP_DIR && cd $TEMP_DIR && \
     wget -c $DOWNLOAD_LINK && \
     tar xf l_openvino_toolkit*.tgz && \
@@ -30,7 +31,7 @@ RUN $INSTALL_DIR/install_dependencies/install_openvino_dependencies.sh
 # build Inference Engine samples
 RUN mkdir $INSTALL_DIR/deployment_tools/inference_engine/samples/build  
 RUN cd $INSTALL_DIR/deployment_tools/inference_engine/samples/build 
-RUN RUN /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh"
+RUN /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh"
 
 #-- error --
 # RUN /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh && cmake .. && make -j1"
