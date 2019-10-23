@@ -5,12 +5,13 @@ FROM ubuntu:16.04
 
 ENV http_proxy $HTTP_PROXY
 ENV https_proxy $HTTP_PROXY
+ENV DEBIAN_FRONTEND noninteractive
 
 ARG DOWNLOAD_LINK=http://registrationcenter-download.intel.com/akdlm/irc_nas/15944/l_openvino_toolkit_p_2019.3.334.tgz
 ARG INSTALL_DIR=/opt/intel/openvino
 ARG TEMP_DIR=/tmp/openvino_installer
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y -q --no-install-recommends \
     wget \
     cpio \
     sudo \
@@ -29,10 +30,12 @@ RUN $INSTALL_DIR/install_dependencies/install_openvino_dependencies.sh
 # build Inference Engine samples
 RUN mkdir $INSTALL_DIR/deployment_tools/inference_engine/samples/build  
 RUN cd $INSTALL_DIR/deployment_tools/inference_engine/samples/build 
-RUN /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh && cmake .. && make -j1"
+RUN RUN /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh"
 
+#-- error --
+# RUN /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh && cmake .. && make -j1"
 # CMD ["source", "/opt/intel/openvino/bin/setupvars.sh"]
-
+# -----------
 
 # Configure the Model Optimizer
 # to be continued
