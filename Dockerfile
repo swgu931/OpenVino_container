@@ -33,13 +33,17 @@ RUN mkdir $INSTALL_DIR/deployment_tools/inference_engine/samples/build
 RUN cd $INSTALL_DIR/deployment_tools/inference_engine/samples/build 
 RUN /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh"
 
-#-- error --
+# -- error --
 # RUN /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh && cmake .. && make -j1"
 # CMD ["source", "/opt/intel/openvino/bin/setupvars.sh"]
 # -----------
 
 # Configure the Model Optimizer
 # to be continued
+RUN cd /opt/intel/openvino/deployment_tools/model_optimizer/install_prerequisites
+RUN sudo ./install_prerequisites.sh
+
+
 
 
 # 1. Build a Docker* image with the following command
@@ -50,3 +54,9 @@ RUN /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh"
 
 # 2. Run a Docker* container with the following command
 # docker run -it <image_name>
+
+# 3. Run the Verification Scripts to Verify Installation
+# cd /opt/intel/openvino/deployment_tools/demo
+# ./demo_squeezenet_download_convert_run.sh   # Run the Image Classification verification script
+# ./demo_security_barrier_camera.sh  # Run the Inference Pipeline verification script:
+
